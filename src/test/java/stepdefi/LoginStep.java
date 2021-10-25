@@ -26,13 +26,14 @@ public class LoginStep {
 	WebDriver driver;
 	String baseurl;
 	String Actual;
+
 	@After
 	public void teardown() throws InterruptedException, IOException {
 
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		String str = RandomString.make(2);
 		System.out.println(str);
-		File dest = new File("C:\\New folder\\NewProject\\screenshot" +str+".png");
+		File dest = new File("C:\\New folder\\NewProject\\screenshot" + str + ".png");
 		FileUtils.copyFile(src, dest);
 		driver.quit();
 	}
@@ -65,19 +66,15 @@ public class LoginStep {
 			System.out.println("logged user as name " + userdata.get(i).get("username"));
 
 			driver.navigate().to(baseurl);
-		
 
 		}
-		
 
 	}
 
 	@Then("user navigated to login page")
 	public void user_navigated_to_login_page() {
 		System.out.println("User is on login page");
-		
 
 	}
-
 
 }

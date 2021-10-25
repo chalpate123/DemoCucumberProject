@@ -1,4 +1,5 @@
 package CommonSteps;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.FileHandler;
@@ -28,20 +29,17 @@ public class CommonBrowserSteps {
 		String str = RandomString.make(2);
 		File dest = new File("C:\\New folder\\NewProject\\screenshot" + str + ".png");
 		FileUtils.copyFile(src, dest);
-
 		driver.quit();
 		Thread.sleep(2000);
 
 	}
 
-
-
 	public WebDriver getdriver() {
 		return driver;
 
 	}
-	
-
-
+	public void setName(WebDriver driver) {
+	    this.driver = driver;
+	  }
 
 }

@@ -31,24 +31,33 @@ import net.bytebuddy.utility.RandomString;
 public class Homepage {
 	WebDriver driver = null;
 	
-	@Before
-	public void browsersetup() {
-		System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+	public Homepage(CommonBrowserSteps cb) {
+		
+	//	CommonBrowserSteps cb=new CommonBrowserSteps();
+		this.driver=cb.getdriver();
+		
+		
 	}
-
-	@After
-	public void teardown(Scenario scenario) throws InterruptedException, IOException {
-		if(scenario.isFailed()){
-
-		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		String str = RandomString.make(4);
-		File dest = new File("C:/New folder/NewProject/screenshot" + str + ".png");
-		FileUtils.copyFile(src, dest);
-		}
-		driver.quit();
-	}
+	
+	
+//	@Before
+//	public void browsersetup() {
+//		System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
+//		driver = new ChromeDriver();
+//		driver.manage().window().maximize();
+//	}
+//
+//	@After
+//	public void teardown(Scenario scenario) throws InterruptedException, IOException {
+//		if(scenario.isFailed()){
+//
+//		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//		String str = RandomString.make(4);
+//		File dest = new File("C:/New folder/NewProject/screenshot" + str + ".png");
+//		FileUtils.copyFile(src, dest);
+//		}
+//		driver.quit();
+//	}
 
 	@Given("I am on ebay home page")
 	public void i_am_on_ebay_home_page() {

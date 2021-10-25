@@ -23,39 +23,32 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.bytebuddy.utility.RandomString;
 
-
 public class advanced {
 	WebDriver driver;
 
+	@Before
+	public void browsersetup() {
+		System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+	}
 
-	
-		
-		@Before
-		public void browsersetup() {
-			System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
-			driver = new ChromeDriver();
-			driver.manage().window().maximize();
-		}
-
-		@After
-		public void teardown(Scenario scenario) throws InterruptedException, IOException {
-			if(scenario.isFailed()){
+	@After
+	public void teardown(Scenario scenario) throws InterruptedException, IOException {
+		if (scenario.isFailed()) {
 
 			File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			String str = RandomString.make(4);
 			File dest = new File("C:/New folder/NewProject/screenshot" + str + ".png");
 			FileUtils.copyFile(src, dest);
-			}
-			driver.quit();
 		}
-
+		driver.quit();
+	}
 
 	@Given("I am Ebay advanced seach page")
 	public void i_am_ebay_advanced_seach_page() {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get("https://www.ebay.com/sch/ebayadvsearch");
-
-
 
 	}
 
@@ -73,10 +66,10 @@ public class advanced {
 		if (!ExpectedUrl.equals(Actual)) {
 			fail("page not navigated to homepage");
 
-
 		}
-		driver.close();
+
 	}
+
 	@Then("I advanced search item")
 	public void i_advanced_search_item(DataTable dataTable) throws InterruptedException {
 
@@ -92,12 +85,6 @@ public class advanced {
 
 		driver.findElement(By.xpath("//button[@id='searchBtnLowerLnk']")).click();
 
-
-
-		driver.close();
 	}
 
-
 }
-
-
